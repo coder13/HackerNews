@@ -20,8 +20,33 @@ export default {
   components: {
     StoryList,
   },
+  data() {
+    return {
+      foo: 'bar',
+    };
+  },
 };
 </script>
 
 <style>
+html, body {
+  background-color: #efefef;
+}
+
+.score {
+  color: #333;
+  font-weight: bold;
+}
+
+.time {
+  font-weight: lighter;
+}
+
+a, a:visited, a:hover {
+  color: #AA0000;
+}
+
+a:hover {
+  text-decoration: underline;
+}
 </style>

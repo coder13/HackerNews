@@ -4,7 +4,8 @@
       <a :href="url" target="_blank">{{this.title}}</a>
     </div>
     <span class="score">{{this.score}}</span>
-    <span class="by">{{this.by}}</span>
+    by <span class="by">{{this.by}}</span>
+    <span class="time">{{this.ago()}}</span>
     <router-link :to="{name: 'item', params: {id: this.id}}">
       {{this.descendants}} comments
     </router-link>
@@ -39,6 +40,19 @@ export default {
     };
   },
   methods: {
+    ago() {
+      const seconds = (Date.now() / 1000) - this.time;
+      if (seconds < 60) {
+        return `${Math.round(seconds)} seconds ago`;
+      } else if (seconds / 60 < 60) {
+        return `${Math.round(seconds / 60)} minutes ago`;
+      } else if (seconds / 3600 < 24) {
+        return `${Math.round(seconds / 3600)} hours ago`;
+      } else if (seconds / (3600 * 24) < 365) {
+        return `${Math.round(seconds / (3600 * 24))} days ago`;
+      }
+      return `It don't matter no more, you do the math: ${this.time}`;
+    },
     commentsURL() {
       return `/${this.id}`;
     },
@@ -62,5 +76,6 @@ export default {
 <style scoped>
 .story {
   margin-top: 1em;
+  background-color: #efefef;
 }
 </style>
