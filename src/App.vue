@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <fish-row>
-      <fish-col type="fixed" :width="400">
+      <fish-col type="fixed" :width="500">
         <StoryList></StoryList>
       </fish-col>
 
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import StoryList from './components/StoryList';
+import StoryList from './components/StoryList.vue';
 
 export default {
   name: 'App',
@@ -36,10 +36,19 @@ html, body {
 .score {
   color: #333;
   font-weight: bold;
+
+}
+
+.score:after {
+  content: ' ';
 }
 
 .time {
-  font-weight: lighter;
+  font-weight: light;
+}
+
+.by:after {
+  content: ' ';
 }
 
 a, a:visited, a:hover {

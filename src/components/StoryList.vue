@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Story from './Story';
+import Story from './Story.vue';
 import { fetchTopStories } from '../lib/api';
 
 export default {

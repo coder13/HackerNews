@@ -7,13 +7,14 @@
       </span>
       {{title ? by : ''}}<span v-if="by" class="by">{{by}}</span>
       <span v-if="time" class="time">
-        <router-link :to="{name: 'item', params: {id: this.id}}">{{ago()}}</router-link>
+        <router-link :to="{name: 'Item', params: {id: this.id}}">{{ago()}}</router-link>
       </span>
     </p>
     <p class="comment--text" v-html="text"></p>
     <div v-for="(kid, index) in visibleKids()" :key="kid">
       <Item :id="kid" :depth="depth+1"
-        :attached="visibleKids().length === 1 ? false : (index === 0 ? 'top' : (index === visibleKids().length - 1 && !more() ? 'bottom' : ''))"/>
+        :attached="visibleKids().length === 1 ? false :
+          (index === 0 ? 'top' : (index === visibleKids().length - 1 && !more() ? 'bottom' : ''))"/>
     </div>
     <fish-segment attached="bottom" v-if="more()">
       <a @click="readMore">Read More...</a>
@@ -66,11 +67,11 @@ export default {
       const seconds = (Date.now() / 1000) - this.time;
       if (seconds < 60) {
         return `${Math.round(seconds)} seconds ago`;
-      } else if (seconds / 60 < 60) {
+      } if (seconds / 60 < 60) {
         return `${Math.round(seconds / 60)} minutes ago`;
-      } else if (seconds / 3600 < 24) {
+      } if (seconds / 3600 < 24) {
         return `${Math.round(seconds / 3600)} hours ago`;
-      } else if (seconds / (3600 * 24) < 365) {
+      } if (seconds / (3600 * 24) < 365) {
         return `${Math.round(seconds / (3600 * 24))} days ago`;
       }
       return `It don't matter no more, you do the math: ${this.time}`;

@@ -1,6 +1,6 @@
 const origin = 'https://hacker-news.firebaseio.com/v0/';
 
-const json = data => data.json();
+const json = (data) => data.json();
 
 export function fetchItem(url) {
   return fetch(`${origin}item/${url}.json`).then(json);
