@@ -16,7 +16,16 @@ import { fetchItem } from '../lib/api';
 
 export default {
   name: 'Story',
-  props: ['id'],
+  props: {
+    id: {
+      type: Number,
+      default: undefined,
+    },
+    depth: {
+      type: Number,
+      default: 0,
+    },
+  },
   data() {
     return {
       by: undefined,

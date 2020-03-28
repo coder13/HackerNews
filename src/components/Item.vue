@@ -1,15 +1,16 @@
 <template>
-  <fish-segment :loading="fetching" class="comments">
+  <fish-segment :loading="fetching" :color="color()" class="comments">
     <p>
       <span v-if="score" class="score">{{score}}</span>
       <span v-if="title" class="title">
         <a href="url">{{title}}</a>
       </span>
       <span v-if="by" class="by">{{by}}</span>
+      {{depth}}
     </p>
     <p v-html="text"></p>
     <div v-for="kid in visibleKids()" :key="kid">
-      <Item :id="kid"/>
+      <Item :id="kid" :depth="depth+1"/>
     </div>
     <a v-if="descendants > 3 && this.limit" @click="readMore">Read More...</a>
   </fish-segment>
@@ -20,7 +21,16 @@ import { fetchItem } from '../lib/api';
 
 export default {
   name: 'Item',
-  props: ['id'],
+  props: {
+    id: {
+      type: Number,
+      default: undefined,
+    },
+    depth: {
+      type: Number,
+      default: 0,
+    },
+  },
   data() {
     return {
       fetching: true,
@@ -44,6 +54,9 @@ export default {
     this.fetchData();
   },
   methods: {
+    color() {
+      return ['red', 'orange', 'yellow', 'green', 'blue', 'violet'][this.depth % 6];
+    },
     readMore() {
       this.limit = false;
     },
