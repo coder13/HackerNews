@@ -1,18 +1,20 @@
 <template>
-  <fish-segment :loading="fetching" :color="color()" class="comments">
+  <fish-segment :loading="fetching" :attached="attached" :color="color()" class="comments">
     <p>
       <span v-if="score" class="score">{{score}}</span>
       <span v-if="title" class="title">
-        <a href="url">{{title}}</a>
+        <a :href="url" target="_blank">{{title}}</a>
       </span>
       <span v-if="by" class="by">{{by}}</span>
-      {{depth}}
     </p>
     <p v-html="text"></p>
-    <div v-for="kid in visibleKids()" :key="kid">
-      <Item :id="kid" :depth="depth+1"/>
+    <div v-for="(kid, index) in visibleKids()" :key="kid">
+      <Item :id="kid" :depth="depth+1"
+        :attached="visibleKids().length === 1 ? false : (index === 0 ? 'top' : (index === visibleKids().length - 1 && !more() ? 'bottom' : ''))"/>
     </div>
-    <a v-if="descendants > 3 && this.limit" @click="readMore">Read More...</a>
+    <fish-segment attached="bottom" v-if="more()">
+      <a @click="readMore">Read More...</a>
+    </fish-segment>
   </fish-segment>
 </template>
 
@@ -22,6 +24,9 @@ import { fetchItem } from '../lib/api';
 export default {
   name: 'Item',
   props: {
+    attached: {
+      default: 'top',
+    },
     id: {
       type: Number,
       default: undefined,
@@ -54,6 +59,9 @@ export default {
     this.fetchData();
   },
   methods: {
+    more() {
+      return this.descendants > 3 && this.limit;
+    },
     color() {
       return ['red', 'orange', 'yellow', 'green', 'blue', 'violet'][this.depth % 6];
     },
