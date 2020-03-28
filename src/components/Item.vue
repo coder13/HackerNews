@@ -85,6 +85,10 @@ export default {
           this.title = data.title;
           this.type = data.type;
           this.url = data.url;
+
+          if (this.title) {
+            document.title = `${this.title} | Hacker News`;
+          }
         }
       });
     },

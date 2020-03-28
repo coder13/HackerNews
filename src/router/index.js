@@ -16,6 +16,10 @@ export default new Router({
     path: '/item/:id',
     name: 'item',
     component: Item,
-    props: true,
+    props(route) {
+      const props = { ...route.params };
+      props.id = +props.id;
+      return props;
+    },
   }],
 });

@@ -3,6 +3,9 @@
     <div v-for="story in visibleStories()"
       :key="story" is="Story" :id="story">
     </div>
+    <fish-segment color="black">
+      <a @click="loadMore">Load more...</a>
+    </fish-segment>
   </div>
 </template>
 
@@ -18,20 +21,21 @@ export default {
   data() {
     return {
       stories: [],
-      page: 0,
+      page: 1,
       pageSize: 20,
     };
   },
   methods: {
+    loadMore() {
+      this.page += 1;
+    },
     visibleStories() {
-      const stories = this.stories.slice(this.page * this.pageSize,
-        (this.page + 1) * this.pageSize);
+      const stories = this.stories.slice(0, this.page * this.pageSize);
       return stories;
     },
   },
   mounted() {
     fetchTopStories().then((data) => {
-      console.log(data);
       this.stories = data;
     });
   },
