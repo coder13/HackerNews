@@ -1,10 +1,13 @@
 <template>
-  <fish-card class="story">
+  <fish-card fluid class="story">
     <div slot="header">
       <a :href="url" target="_blank">{{this.title}}</a>
     </div>
-    {{this.score}} |
-    <router-link :to="{name: 'item', params: {id: this.id}}">{{this.kids.length}} comments</router-link>
+    <span class="score">{{this.score}}</span>
+    <span class="by">{{this.by}}</span>
+    <router-link :to="{name: 'item', params: {id: this.id}}">
+      {{this.descendants}} comments
+    </router-link>
   </fish-card>
 </template>
 
@@ -49,6 +52,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .story {
-  margin-bottom: 1em;
+  margin-top: 1em;
 }
 </style>

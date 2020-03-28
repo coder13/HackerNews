@@ -1,11 +1,18 @@
 <template>
-  <div class="comments">
-    <p>{{type === 'story' ? `${score} | ${title} | ` : ''}} {{ this.by }}</p>
+  <fish-segment :loading="fetching" class="comments">
+    <p>
+      <span v-if="score" class="score">{{score}}</span>
+      <span v-if="title" class="title">
+        <a href="url">{{title}}</a>
+      </span>
+      <span v-if="by" class="by">{{by}}</span>
+    </p>
     <p v-html="text"></p>
     <div v-for="kid in visibleKids()" :key="kid">
       <Item :id="kid"/>
     </div>
-  </div>
+    <a v-if="descendants > 3 && this.limit" @click="readMore">Read More...</a>
+  </fish-segment>
 </template>
 
 <script>
@@ -16,6 +23,7 @@ export default {
   props: ['id'],
   data() {
     return {
+      fetching: true,
       by: undefined,
       score: undefined,
       parent: undefined,
@@ -25,6 +33,8 @@ export default {
       title: undefined,
       type: undefined,
       url: undefined,
+      descendants: undefined,
+      limit: true,
     };
   },
   watch: {
@@ -34,12 +44,17 @@ export default {
     this.fetchData();
   },
   methods: {
+    readMore() {
+      this.limit = false;
+    },
     visibleKids() {
-      return this.kids.slice(0, 3);
+      return this.limit ? this.kids.slice(0, 3) : this.kids;
     },
     fetchData() {
+      this.fetching = true;
       fetchItem(this.id).then((data) => {
         if (data) {
+          this.fetching = false;
           this.by = data.by;
           this.descendants = data.descendants;
           this.score = data.score;
@@ -59,6 +74,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .comments {
-  margin: 1em;
+  padding: 1em;
 }
 </style>

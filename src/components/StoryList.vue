@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div span="16" v-for="story in visibleStories()"
+    <div v-for="story in visibleStories()"
       :key="story" is="Story" :id="story">
     </div>
   </div>
@@ -40,6 +40,6 @@ export default {
 
 <style>
 .container {
-  padding: 2em;
+  margin: .5em;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <fish-row gutter="1">
-      <fish-col type="fixed" :width="300">
+    <fish-row>
+      <fish-col type="fixed" :width="400">
         <StoryList></StoryList>
       </fish-col>
 

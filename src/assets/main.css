@@ -1,0 +1,13 @@
+.score {
+  color: red;
+  margin-right: .5em;
+}
+
+.title {
+  margin-right: .5em;
+}
+
+.by {
+  font-weight: bold;
+  margin-right: .5em;
+}

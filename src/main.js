@@ -4,6 +4,7 @@ import Vue from 'vue';
 import FishUI from 'fish-ui';
 import App from './App';
 import router from './router';
+import './assets/main.css';
 
 Vue.use(FishUI);
 
