@@ -1,9 +1,10 @@
 <template>
   <fish-card class="story">
     <div slot="header">
-      <span>{{this.title}}</span>
+      <a :href="url" target="_blank">{{this.title}}</a>
     </div>
-    {{this.score}} | {{this.kids.length}} comments
+    {{this.score}} |
+    <router-link :to="{name: 'item', params: {id: this.id}}">{{this.kids.length}} comments</router-link>
   </fish-card>
 </template>
 
@@ -12,7 +13,7 @@ import { fetchItem } from '../lib/api';
 
 export default {
   name: 'Story',
-  props: ['item'],
+  props: ['id'],
   data() {
     return {
       by: undefined,
@@ -25,12 +26,17 @@ export default {
       url: undefined,
     };
   },
+  methods: {
+    commentsURL() {
+      return `/${this.id}`;
+    },
+  },
   created() {
-    fetchItem(this.item).then((data) => {
+    fetchItem(this.id).then((data) => {
       this.by = data.by;
       this.descendants = data.descendants;
       this.score = data.score;
-      this.kids = data.kids;
+      this.kids = data.kids || [];
       this.time = data.time;
       this.title = data.title;
       this.type = data.type;

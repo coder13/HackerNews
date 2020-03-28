@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div span="16" v-for="story in visibleStories()"
-      :key="story" is="Story" :item="story">
+      :key="story" is="Story" :id="story">
     </div>
   </div>
 </template>
