@@ -19,11 +19,13 @@ const NavLink = ({ to, children, props }) => {
 
 function Header() {
   return (
-    <nav className="flex h-10 pl-4 bg-yellow-600 text-gray-900 shadow-md">
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/newest">New</NavLink>
-      <NavLink to="/past">Past</NavLink>
-      <NavLink to="/comments">Comments</NavLink>
+    <nav className="flex flex-col flex-0 h-10 items-center bg-yellow-600 text-gray-900 shadow-md">
+      <div className="flex w-10/12">
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/newest">New</NavLink>
+        <NavLink to="/past">Past</NavLink>
+        <NavLink to="/comments">Comments</NavLink>
+      </div>
     </nav>
   );
 }

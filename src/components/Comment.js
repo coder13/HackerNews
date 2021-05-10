@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { formatDistanceToNow } from 'date-fns';
 import { fetchItem } from '../lib/api';
 
 function Comment({ item }) {
@@ -16,18 +17,21 @@ function Comment({ item }) {
 
   if (!data) {
     return (
-      <div className="flex p-2">
+      <div className="flex p-4">
         {item}
       </div>
     )
   }
 
   return (
-    <div className="flex flex-col p-2">
+    <div className="p-4">
+      <div className="text-sm text-gray-400 mb-1">
+        {data.by} {formatDistanceToNow(new Date(data.time * 1000))} ago
+      </div>
       <div dangerouslySetInnerHTML={{__html: data.text }} />
       {data.kids && (
         <div className="flex flex-col">
-          {data.kids.map((kid) => (
+          {data.kids.slice(0,10).map((kid) => (
             <Comment key={kid} item={kid} />
           ))}
         </div>

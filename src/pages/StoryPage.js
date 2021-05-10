@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { formatDistanceToNow } from 'date-fns';
 import Comment from '../components/Comment';
 import { fetchItem } from '../lib/api';
 
 function StoryPage() {
   let { item } = useParams();
-  console.log(item);
 
   const [data, setData] = useState(null);
 
@@ -20,21 +20,32 @@ function StoryPage() {
   }, [item]);
 
   return (
-    <div className="flex flex-col flex-1 justify-items-center items-center p-2 h-full overflow-auto">
-      {!data ? (
-        item
-      ) : (
-        <>
-          <div>
-            {data.title}
-          </div>
-          <div>
-            {data.kids.map((kid) => (
-              <Comment key={kid} item={kid} />
-            ))}
-          </div>
-        </>
-      )}
+    <div className="flex flex-col flex-1 items-center pt-4 h-full overflow-auto">
+      <div className="w-10/12">
+        {!data ? (
+          item
+        ) : (
+          <>
+            <div>
+              {data.title}
+            </div>
+            <div className="w-full text-sm text-gray-400">
+              {data.score} points by {data.by} {formatDistanceToNow(new Date(data.time * 1000))} ago
+              {' | '}
+              <button>hide</button>
+              {' | '}
+              <Link to={`/item/${item}`}>
+                {data.descendants} comments
+              </Link>
+            </div>
+            <div className="flex flex-col pt-4">
+              {data.kids.map((kid) => (
+                <Comment key={kid} item={kid} />
+                ))}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
