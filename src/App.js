@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
 import StoryList from './pages/StoryList';
 import StoryPage from './pages/StoryPage';
+import UserPage from './pages/UserPage';
 
 function App() {
 
@@ -21,6 +22,9 @@ function App() {
           </Route>
           <Route path="/item/:item">
             <StoryPage />
+          </Route>
+          <Route path="/user/:user">
+            <UserPage />
           </Route>
         </Switch>
       </div>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { fetchItem } from '../lib/api';
 
-function Comment({ item }) {
+function Comment({ item, replyDepth }) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function Comment({ item }) {
       <div dangerouslySetInnerHTML={{__html: data.text }} />
       {data.kids && (
         <div className="flex flex-col">
-          {data.kids.slice(0,10).map((kid) => (
+          {data.kids.slice(0, replyDepth || 10).map((kid) => (
             <Comment key={kid} item={kid} />
           ))}
         </div>
