@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNowStrict } from 'date-fns';
 import { ArrowUp } from '../components/Icons';
 import { fetchItem } from '../lib/api';
 
@@ -21,7 +21,7 @@ function StoryListItem({ storyId, index }) {
     <div className="flex w-10/12 rounded-sm p-2 my-1 transition-all shadow-sm hover:shadow-md hover:bg-gray-100 focus:ring-2">
       {!data ? storyId : (
         <>
-          {index && (<div className="text-lg flex p-auto items-center">{index}</div>)}
+          {index && (<div className="text-lg flex w-6 items-center justify-end"><span>{index}</span></div>)}
           <button className="flex p-1 items-center align-top">
             <ArrowUp />
           </button>
@@ -36,7 +36,7 @@ function StoryListItem({ storyId, index }) {
               {' '}
               <Link className="hover:underline" to={`/user/${data.by}`}>{data.by}</Link>
               {' '}
-              {formatDistanceToNow(new Date(data.time * 1000))} ago
+              <Link className="hover:underline" to={`/item/${data.item}`}>{formatDistanceToNowStrict(new Date(data.time * 1000))} ago</Link>
               {' | '}
               <button>hide</button>
               {' | '}

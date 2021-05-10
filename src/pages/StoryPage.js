@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNowStrict } from 'date-fns';
 import Comment from '../components/Comment';
 import { fetchItem } from '../lib/api';
 
@@ -27,10 +27,10 @@ function StoryPage() {
         ) : (
           <>
             <div>
-              {data.title}
+              <a target="_blank" rel="noreferrer" href={data.url}>{data.title}</a>
             </div>
             <div className="w-full text-sm text-gray-400">
-              {data.score} points by {data.by} {formatDistanceToNow(new Date(data.time * 1000))} ago
+              {data.score} points by {data.by} {formatDistanceToNowStrict(new Date(data.time * 1000))} ago
               {' | '}
               <button>hide</button>
               {' | '}
