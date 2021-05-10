@@ -21,7 +21,8 @@ function StoryListItem({ storyId, index }) {
     <div className="flex w-10/12 rounded-sm p-2 my-1 transition-all shadow-sm hover:shadow-md hover:bg-gray-100 focus:ring-2">
       {!data ? storyId : (
         <>
-          <button className="flex p-1 justify-items-start align-top">
+          <div className="text-lg flex p-auto items-center">{index}</div>
+          <button className="flex p-1 items-center align-top">
             <ArrowUp />
           </button>
           <div className="flex-col flex-1">

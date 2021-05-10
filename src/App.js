@@ -11,7 +11,13 @@ function App() {
         <Header />
         <Switch>
           <Route exact path="/">
-            <StoryList />
+            <StoryList title="Top Stories" url="/topstories" />
+          </Route>
+          <Route exact path="/newest">
+            <StoryList title="Newest Stories" url="/newstories" />
+          </Route>
+          <Route exact path="/best">
+            <StoryList title="Best Stories" url="/beststories" />
           </Route>
           <Route path="/item/:item">
             <StoryPage />

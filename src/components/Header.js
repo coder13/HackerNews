@@ -23,6 +23,7 @@ function Header() {
       <div className="flex w-10/12">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/newest">New</NavLink>
+        <NavLink to="/best">Best</NavLink>
         <NavLink to="/past">Past</NavLink>
         <NavLink to="/comments">Comments</NavLink>
       </div>
