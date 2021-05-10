@@ -1,11 +1,7 @@
-const origin = 'https://hacker-news.firebaseio.com/v0/';
+const HACKER_NEWS_URI = 'https://hacker-news.firebaseio.com/v0/'
 
-const json = (data) => data.json();
+const toJson = (data) => data.json();
 
-export function fetchItem(url) {
-  return fetch(`${origin}item/${url}.json`).then(json);
-}
+export const topStories = fetch(`${HACKER_NEWS_URI}/topstories.json`).then(toJson);
 
-export function fetchTopStories() {
-  return fetch(`${origin}topstories.json`).then(json);
-}
+export const fetchItem = (url) => fetch(`${HACKER_NEWS_URI}item/${url}.json`).then(toJson);
